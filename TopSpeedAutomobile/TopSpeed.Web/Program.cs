@@ -97,7 +97,7 @@ app.UseAuthorization();
 
 app.UseSession();//-->newly added
 
-app.MapRazorPages();//-->newly added
+app.MapRazorPages();//-->newly added.........
 
 app.MapControllerRoute(
     name: "default",
