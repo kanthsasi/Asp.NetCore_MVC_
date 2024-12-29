@@ -1,0 +1,75 @@
+﻿@model List<CarDetails>
+
+@{
+	int count = 0;
+}
+
+<div class="container">
+	<div class="row mb-4">
+		<div class="col-md-6 text-uppercase">
+			<h2>Car Details List</h2>
+		</div>
+		<div class="col-md-6 text-end">
+			<a asp-area="Admin" asp-controller="CarDetails" asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Create</a>
+		</div>
+	</div>
+</div>
+<hr />
+@if (Model.Count() > 0)
+{
+	<table id="table" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">S.No</th>
+				<th class="text-center">Name</th>
+				<th class="text-center">Brand</th>
+				<th class="text-center">Vehical Type</th>
+				<th class="text-center">Ratings</th>
+				<th class="text-center">Action</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td class="text-center">@(++count)</td>
+					<td >@item.Name</td>
+					<td class="text-center">@item.Brand.Name</td>
+					<td class="text-center">@item.VehicalType.Name</td>
+					<td class="text-center">@item.Ratings</td>
+					<td class="d-flex align-items-center justify-content-center">
+						<div class="w-100 btn-group" role="group">
+							<a asp-area="Admin" asp-controller="CarDetails" asp-action="Details" asp-route-id="@item.Id"
+							   class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Details">
+								<i class="bi bi-info-circle"></i>
+							</a>
+							<a asp-area="Admin" asp-controller="CarDetails" asp-action="Edit" asp-route-id="@item.Id"
+							   class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit">
+								<i class="bi bi-pencil-square"></i>
+							</a>
+							<a asp-area="Admin" asp-controller="CarDetails" asp-action="Delete" asp-route-id="@item.Id"
+							   class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
+								<i class="bi bi-trash"></i>
+							</a>
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<div class="container">
+		<div class="row">
+			<div class="text-center text-uppercase text-warning pt-4">No Record to Show</div>
+		</div>
+	</div>
+}
+
+@section Scripts {
+	<script>
+		$('.table').DataTable();
+	</script>
+}
